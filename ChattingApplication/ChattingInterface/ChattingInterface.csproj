@@ -4,14 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0CE5854D-9FB4-4CD3-8993-87F513FDE2DB}</ProjectGuid>
+    <ProjectGuid>{70DB1555-47B7-4A8D-A7D9-D2B094F4D51F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ChattingInterfaces</RootNamespace>
-    <AssemblyName>ChattingInterfaces</AssemblyName>
+    <RootNamespace>ChattingInterface</RootNamespace>
+    <AssemblyName>ChattingInterface</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

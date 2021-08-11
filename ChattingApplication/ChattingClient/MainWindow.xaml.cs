@@ -1,6 +1,8 @@
-﻿using System;
+﻿using ChatInterface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,9 +22,50 @@ namespace ChattingClient
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static IChatService Server;
+        private static DuplexChannelFactory<IChatService> _channelFactory;
         public MainWindow()
         {
             InitializeComponent();
+            _channelFactory = new DuplexChannelFactory<IChatService>(new ClientCallBack(), "ChatServiceEndPoint");
+            Server = _channelFactory.CreateChannel();
+
+           
+        }
+        public void TakeMessage(string message, string userName)
+        {
+            TextBox.Text += userName + ": " + message+"\n";
+            TextBox.ScrollToEnd();
+
+        }
+
+        private void SendButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageTextBox.Text.Length ==0)
+            {
+                return;
+            }
+            Server.SendMessageToAll(MessageTextBox.Text, UserNameTextBox.Text);
+            TakeMessage(MessageTextBox.Text, "you");
+            MessageTextBox.Text = "";
+            //MessageTextBox.Focus();
+        }
+
+        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        {
+            int returnValue = Server.Login(UserNameTextBox.Text)
+;
+            if (returnValue ==1)
+            {
+                MessageBox.Show("You are already logged in. Try agin");
+            }
+            else if (returnValue ==0)
+            {
+                MessageBox.Show("You logged in!");
+                WelcomeLabel.Content = "Welcome " + UserNameTextBox.Text + "!";
+                UserNameTextBox.IsEnabled = false;
+                LoginButton.IsEnabled = false;
+            }
         }
     }
 }
