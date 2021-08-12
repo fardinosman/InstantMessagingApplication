@@ -17,6 +17,12 @@ namespace ChatInterface
         [OperationContract]
          void SendMessageToAll(string message, string userName);
 
+        [OperationContract]
+        void Logout();
+
+        [OperationContract]
+        List<string> GetCurrentUsers();
+
 
 
 

@@ -65,7 +65,35 @@ namespace ChattingClient
                 WelcomeLabel.Content = "Welcome " + UserNameTextBox.Text + "!";
                 UserNameTextBox.IsEnabled = false;
                 LoginButton.IsEnabled = false;
+                //this  will load our users
+                LoadUserList(Server.GetCurrentUsers());
+
+                
             }
+        }
+        private void LoadUserList(List<string> users)
+        {
+            foreach (var user in users)
+            {
+                AddUSerToList(user);
+            }
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Server.Logout();
+        }
+        public void AddUSerToList(string userName)
+        {
+            if (UsersListBox.Items.Contains(userName))
+            {
+                return;
+            }
+            UsersListBox.Items.Add(userName);
+        }
+        public void RemoveUserFromList(string userName)
+        {
+            UsersListBox.Items.Remove(userName);
         }
     }
 }
